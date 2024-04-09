@@ -1,9 +1,25 @@
-.card {
-   background-color: red;
-   height: 200px;
-   width: 500px;
+* {
+  margin: 0;
+  padding: 0;
+}
 
-   &-name {
-      color: green;
-   }
+.card {
+  background-color: red;
+  height: 200px;
+  width: 500px;
+  margin: 10px;
+
+  &-name {
+    color: green;
+  }
+}
+
+.background {
+  background-color: #cccccc; /* Used if the image is unavailable */
+  height: 1000px; /* You must set a specified height */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+  background-attachment: fixed;
+  background-image: url("./assets/background.png");
 }

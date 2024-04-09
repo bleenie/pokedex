@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import "./style.scss";
+import PokemonTypes from "./components/pokemon-types/PokemonTypes";
 
 export default function App() {
   const [pokemonData, setPokemonData] = useState([]);
+  const bgimg = "./assets.background.png";
 
   useEffect(() => {
     fetch("https://pokeapi.co/api/v2/pokemon?limit=151")
@@ -21,22 +23,16 @@ export default function App() {
 
   return (
     <>
-      <div
-        style={{
-          backgroundImage: `url("https://via.placeholder.com/500")`,
-        }}
-      >
-        {pokemonData.map((pokemon) => (
-          <div key={pokemon.name} className="card">
-            <p>{pokemon.name}</p>
-            <p>{pokemon.id}</p>
-            {pokemon.types.map((pokemontypes) => (
-              <p>{pokemontypes.type.name}</p>
-            ))}
-            <img src={pokemon.sprites.front_default} alt={pokemon.name}></img>
-          </div>
-        ))}
-      </div>
+      {pokemonData.map((pokemon) => (
+        <div key={pokemon.name} className="card">
+          <p>{pokemon.name}</p>
+          <p>{pokemon.id}</p>
+          <img src={pokemon.sprites.front_default} alt={pokemon.name}></img>
+          {pokemon.types.map((pokemontypes) => (
+            <PokemonTypes type={pokemontypes.type.name} />
+          ))}
+        </div>
+      ))}
     </>
   );
 }
