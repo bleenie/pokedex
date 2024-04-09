@@ -1,11 +1,9 @@
+.card {
+   background-color: red;
+   height: 200px;
+   width: 500px;
 
-
-.pokemon {
-background-color: red;
-height: 200px;
-width: 500px;
-
- &-name{
-    color: green;
- }
+   &-name {
+      color: green;
+   }
 }
