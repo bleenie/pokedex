@@ -1,30 +1,45 @@
-import { useState, useEffect } from "react"
-import "./style.scss"
-
+import { useState, useEffect } from "react";
+import "./style.scss";
 
 export default function App() {
-  const [allPokemon, setAllPokemon] = useState();
-  const [pokemonData, setPokemonData] = useState();
-  
+  const [pokemonData, setPokemonData] = useState([]);
+
   useEffect(() => {
-    fetch("https://pokeapi.co/api/v2/pokemon?limit=50")
-    .then((response) => response.json())
-    .then((json) => setAllPokemon(json));
+    fetch("https://pokeapi.co/api/v2/pokemon?limit=151")
+      .then((response) => response.json())
+      .then((pokemons) => {
+        Promise.all(
+          pokemons.results.map((pokemon) =>
+            fetch(pokemon.url).then((res) => res.json())
+          )
+        ).then((allPokemons) => {
+          console.log(allPokemons);
+          setPokemonData(allPokemons);
+        });
+      });
   }, []);
 
   return (
     <>
-    {allPokemon?.results.map(pokemon => (
-      
-      <div key={pokemon.name} className="card">
-        <p>{pokemon.name}</p>
-        <img src="`https://img.pokemondb.net/sprites/black-white/normal/${pokemon.name}png`" alt={pokemon.name}></img>
+      <div
+        style={{
+          backgroundImage: `url("https://via.placeholder.com/500")`,
+        }}
+      >
+        {pokemonData.map((pokemon) => (
+          <div key={pokemon.name} className="card">
+            <p>{pokemon.name}</p>
+            <p>{pokemon.id}</p>
+            {pokemon.types.map((pokemontypes) => (
+              <p>{pokemontypes.type.name}</p>
+            ))}
+            <img src={pokemon.sprites.front_default} alt={pokemon.name}></img>
+          </div>
+        ))}
       </div>
-      ))}
-      </>
+    </>
   );
 }
-
 
 // {pokemonData.map(pokemon => (
 //   <div className="card">
@@ -33,21 +48,12 @@ export default function App() {
 //   </div>
 //   ))}
 
-
-
-
-
-
-
 // useEffect(() => {
 //   fetch(pokemonData?.results[0].url)
 //   .then((response) => response.json())
 //   .then((json) => setPokemonInfo(json))
-//   .then 
+//   .then
 // }, []);
-
-
-
 
 // {pokemonData?.results.map(pokemon => (
 // <div key={pokemon.name}>
@@ -62,6 +68,6 @@ export default function App() {
 //       Pokemon: {pokemonData?.results[0].name}
 //     </p>
 //     <img src={pokemonInfo?.sprites.front_default} alt={pokemonData?.results[0].name}></img>
-    
+
 //   </div>
 //   );
