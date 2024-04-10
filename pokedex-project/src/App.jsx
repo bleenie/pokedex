@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import "./style.scss";
-import PokemonTypes from "./components/pokemon-types/PokemonTypes";
+import FilteredPokemon from "./components/filtered-pokemon/FilteredPokemon";
 
 export default function App() {
   const [pokemonData, setPokemonData] = useState([]);
-  const bgimg = "./assets.background.png";
 
   useEffect(() => {
     fetch("https://pokeapi.co/api/v2/pokemon?limit=151")
@@ -23,16 +22,7 @@ export default function App() {
 
   return (
     <>
-      {pokemonData.map((pokemon) => (
-        <div key={pokemon.name} className="card">
-          <p>{pokemon.name}</p>
-          <p>{pokemon.id}</p>
-          <img src={pokemon.sprites.front_default} alt={pokemon.name}></img>
-          {pokemon.types.map((pokemontypes) => (
-            <PokemonTypes type={pokemontypes.type.name} />
-          ))}
-        </div>
-      ))}
+      <FilteredPokemon pokemonData={pokemonData} />
     </>
   );
 }

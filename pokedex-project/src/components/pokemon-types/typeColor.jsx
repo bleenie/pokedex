@@ -16,7 +16,7 @@ const typeColor = {
   dragon: ["#6F35FC", "#3f1a99"],
   dark: ["#705746", "#3d2c20"],
   steel: ["#B7B7CE", "#77779e"],
-  fairy: ["#D685AD", "#b0487b"],
+  fairy: ["#D685AD", "#a64273"],
 };
 
 export default typeColor;
