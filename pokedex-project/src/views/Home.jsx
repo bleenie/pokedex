@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import "../style.scss";
 import PokemonList from "../components/pokemon-list/PokemonList";
 
 const Home = () => {

@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import PokemonTypes from "../pokemon-types/PokemonTypes";
 import Favorite from "../favorite/Favorite";
+import Card from "../card/Card";
 
 const PokemonList = ({ pokemonData }) => {
   //Manage favorite pokemon
   const [favorites, setFavorites] = useState([]);
   const getArray = JSON.parse(localStorage.getItem("favorites") || "0");
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (getArray !== 0) {
@@ -34,7 +33,10 @@ const PokemonList = ({ pokemonData }) => {
 
     const storage = localStorage.getItem("favItem" + selectedPokemon || "0");
     if (storage == null) {
-      localStorage.setItem("favItem" + selectedPokemon);
+      localStorage.setItem(
+        "favItem" + selectedPokemon.key,
+        JSON.stringify(selectedPokemon)
+      );
     } else {
       localStorage.removeItem("favItem" + selectedPokemon);
     }
@@ -59,9 +61,6 @@ const PokemonList = ({ pokemonData }) => {
     setFilteredPokemon(pokemonData);
   }, [pokemonData]);
 
-  //redirect link
-  const handleClick = () => navigate("/pokemon");
-
   return (
     <>
       <input
@@ -71,15 +70,7 @@ const PokemonList = ({ pokemonData }) => {
         placeholder="Type to search"
       />
       {filteredPokemon.map((pokemon) => (
-        <div key={pokemon.name} className="card" onClick={handleClick}>
-          <p>{pokemon.name}</p>
-          <p>{pokemon.id}</p>
-          <img src={pokemon.sprites.front_default} alt={pokemon.name}></img>
-          {pokemon.types.map((pokemontypes) => (
-            <PokemonTypes type={pokemontypes.type.name} />
-          ))}
-          <Favorite favorites={favorites} addFav={addFav} pokemon={pokemon} />
-        </div>
+        <Card favorites={favorites} addFav={addFav} pokemon={pokemon} />
       ))}
     </>
   );

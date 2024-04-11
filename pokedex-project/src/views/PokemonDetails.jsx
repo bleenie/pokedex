@@ -1,5 +1,5 @@
 const PokemonDetails = () => {
-  return <></>;
+  return <>Hello</>;
 };
 
 export default PokemonDetails;
