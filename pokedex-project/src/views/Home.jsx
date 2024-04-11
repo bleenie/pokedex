@@ -1,24 +1,6 @@
-import { useState, useEffect } from "react";
 import PokemonList from "../components/pokemon-list/PokemonList";
 
-const Home = () => {
-  const [pokemonData, setPokemonData] = useState([]);
-
-  useEffect(() => {
-    fetch("https://pokeapi.co/api/v2/pokemon?limit=151")
-      .then((response) => response.json())
-      .then((pokemons) => {
-        Promise.all(
-          pokemons.results.map((pokemon) =>
-            fetch(pokemon.url).then((res) => res.json())
-          )
-        ).then((allPokemons) => {
-          console.log(allPokemons);
-          setPokemonData(allPokemons);
-        });
-      });
-  }, []);
-
+const Home = ({ pokemonData }) => {
   return (
     <>
       <PokemonList pokemonData={pokemonData} />

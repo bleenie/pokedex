@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import PokemonTypes from "../pokemon-types/PokemonTypes";
-import Favorite from "../favorite/Favorite";
 import Card from "../card/Card";
 
 const PokemonList = ({ pokemonData }) => {
@@ -13,7 +11,9 @@ const PokemonList = ({ pokemonData }) => {
       setFavorites([...getArray]);
     }
   }, []);
-  const addFav = (selectedPokemon) => {
+
+  const addFav = (selectedPokemon, e) => {
+    e.stopPropagation();
     let array = favorites;
     let addArray = true;
     array.map((favorite, key) => {
