@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import Card from "../card/Card";
+import SearchBar from "../search-bar/SearchBar";
 
 const PokemonList = ({ pokemonData }) => {
+  //Search bar filtering
+  const [filteredPokemon, setFilteredPokemon] = useState(pokemonData);
   //Manage favorite pokemon
   const [favorites, setFavorites] = useState([]);
   const getArray = JSON.parse(localStorage.getItem("favorites") || "0");
@@ -42,32 +45,11 @@ const PokemonList = ({ pokemonData }) => {
     }
   };
 
-  //Search for pokemon
-  const [searchItem, setSearchItem] = useState("");
-  const [filteredPokemon, setFilteredPokemon] = useState(pokemonData);
-
-  const handleInputChange = (e) => {
-    const searchTerm = e.target.value;
-    setSearchItem(searchTerm);
-
-    const filteredItems = pokemonData.filter((pokemon) =>
-      pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-
-    setFilteredPokemon(filteredItems);
-  };
-
-  useEffect(() => {
-    setFilteredPokemon(pokemonData);
-  }, [pokemonData]);
-
   return (
     <>
-      <input
-        type="text"
-        value={searchItem}
-        onChange={handleInputChange}
-        placeholder="Type to search"
+      <SearchBar
+        pokemonData={pokemonData}
+        setFilteredPokemon={setFilteredPokemon}
       />
       {filteredPokemon.map((pokemon) => (
         <Card favorites={favorites} addFav={addFav} pokemon={pokemon} />
