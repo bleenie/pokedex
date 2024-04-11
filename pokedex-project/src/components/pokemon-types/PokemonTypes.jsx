@@ -1,5 +1,4 @@
 import "./type.scss";
-import "../../App";
 import typeColor from "./typeColor";
 
 const PokemonTypes = ({ type }) => {
