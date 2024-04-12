@@ -16,7 +16,6 @@ const App = () => {
             fetch(pokemon.url).then((res) => res.json())
           )
         ).then((allPokemons) => {
-          console.log(allPokemons);
           setPokemonData(allPokemons);
         });
       });

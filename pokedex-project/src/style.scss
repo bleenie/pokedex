@@ -3,20 +3,6 @@
   padding: 0;
 }
 
-.card {
-  background-color: rgba(241, 241, 241, 0.747);
-  height: 200px;
-  width: 500px;
-  margin: 10px;
-
-  &-detail {
-    background-color: rgba(241, 241, 241, 0.747);
-    height: 500px;
-    width: 1000px;
-    margin: 10px;
-  }
-}
-
 .background {
   background-color: #cccccc; /* Used if the image is unavailable */
   height: 1000px; /* You must set a specified height */

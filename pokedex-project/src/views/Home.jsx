@@ -1,42 +1,20 @@
 import PokemonList from "../components/pokemon-list/PokemonList";
+import SearchBar from "../components/search-bar/SearchBar";
+import { useState } from "react";
 
 const Home = ({ pokemonData }) => {
+  //Create variable for list of visible pokemon based on filter
+  const [filteredPokemon, setFilteredPokemon] = useState(pokemonData);
+
   return (
     <>
-      <PokemonList pokemonData={pokemonData} />
+      <SearchBar
+        pokemonData={pokemonData}
+        setFilteredPokemon={setFilteredPokemon}
+      />
+      <PokemonList filteredPokemon={filteredPokemon} />
     </>
   );
 };
 
 export default Home;
-
-// {pokemonData.map(pokemon => (
-//   <div className="card">
-//     <p>{pokemon.name}</p>
-//     <img src={pokemon.sprites.front_default} alt={pokemon.name}></img>
-//   </div>
-//   ))}
-
-// useEffect(() => {
-//   fetch(pokemonData?.results[0].url)
-//   .then((response) => response.json())
-//   .then((json) => setPokemonInfo(json))
-//   .then
-// }, []);
-
-// {pokemonData?.results.map(pokemon => (
-// <div key={pokemon.name}>
-//   <p>{pokemon.name}</p>
-//   <img src={pokemonInfo?.sprites.front_default} alt={pokemonData?.results[0].name}></img>
-// </div>
-// ))}
-
-// return (
-//   <div className="pokemon">
-//     <p className="pokemon-name">
-//       Pokemon: {pokemonData?.results[0].name}
-//     </p>
-//     <img src={pokemonInfo?.sprites.front_default} alt={pokemonData?.results[0].name}></img>
-
-//   </div>
-//   );

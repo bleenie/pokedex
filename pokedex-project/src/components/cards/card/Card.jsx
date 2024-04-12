@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import PokemonTypes from "../pokemon-types/PokemonTypes";
-import Favorite from "../favorite/Favorite";
+import PokemonTypes from "../../pokemon-types/PokemonTypes";
+import Favorite from "../../favorite/Favorite";
+import "../cards.scss";
 
-const Card = ({ favorites, addFav, pokemon }) => {
+const Card = ({ pokemon }) => {
   //Navigate to details page
   const navigate = useNavigate();
   const handleClick = () => navigate(`/pokemon/${pokemon.id}`);
@@ -15,7 +16,7 @@ const Card = ({ favorites, addFav, pokemon }) => {
       {pokemon.types.map((pokemontypes) => (
         <PokemonTypes type={pokemontypes.type.name} />
       ))}
-      <Favorite favorites={favorites} addFav={addFav} pokemon={pokemon} />
+      <Favorite pokemon={pokemon} />
     </div>
   );
 };

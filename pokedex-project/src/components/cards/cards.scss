@@ -1,0 +1,13 @@
+.card {
+  background-color: rgba(241, 241, 241, 0.747);
+  height: 200px;
+  width: 200px;
+  margin: 10px;
+
+  &-detail {
+    background-color: rgba(241, 241, 241, 0.747);
+    height: 500px;
+    width: 700px;
+    margin: 10px;
+  }
+}
