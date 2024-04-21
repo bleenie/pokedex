@@ -1,4 +1,4 @@
-import { PieChart, Pie } from "recharts";
+import { BarChart, Bar, CartesianGrid, XAxis, YAxis } from "recharts";
 
 const BattleStats = ({ pokemon }) => {
   const hp = pokemon.stats[0].base_stat;
@@ -22,10 +22,13 @@ const BattleStats = ({ pokemon }) => {
   }
   return (
     <>
-      <p>Battle stats</p>
-      <PieChart width={300} height={300}>
-        <Pie data={data} dataKey="stat" outerRadius={90} innerRadius={50} />
-      </PieChart>
+      <p>Battle Stats:</p>
+      <BarChart width={410} height={250} data={data}>
+        <Bar dataKey="stat" />
+        <CartesianGrid stroke="#ccc" />
+        <XAxis dataKey="name" />
+        <YAxis />
+      </BarChart>
     </>
   );
 };
