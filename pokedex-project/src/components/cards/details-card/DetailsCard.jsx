@@ -16,7 +16,7 @@ const DetailsCard = ({ pokemon }) => {
       ))}
       <p>Height: {pokemon.height * 10} cm</p>
       <p>Weight: {pokemon.weight / 10} kg</p>
-      {/* <BattleStats pokemon={pokemon} /> */}
+      <BattleStats pokemon={pokemon} />
     </div>
   );
 };

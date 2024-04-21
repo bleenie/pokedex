@@ -4,25 +4,19 @@ import { useEffect, useState } from "react";
 
 const PokemonDetails = ({ pokemonData }) => {
   const { id } = useParams();
-  const [pokemon, setPokemon] = useState([]);
+  const [pokemon, setPokemon] = useState();
 
   useEffect(() => {
-    getPokemon();
+    console.log(pokemonData);
+    const foundPokemon = pokemonData.find((pokemon) => pokemon.id == id);
+    setPokemon(foundPokemon);
   }, []);
 
-  const getPokemon = () => {
-    pokemonData.map((pokemon) => {
-      if (pokemon.id == id) {
-        setPokemon(pokemon);
-      }
-    });
-  };
+  if (!pokemon) {
+    return <>Loading....</>;
+  }
 
-  return (
-    <>
-      <DetailsCard pokemon={pokemon} />
-    </>
-  );
+  return <>{pokemon ? <DetailsCard pokemon={pokemon} /> : ""}</>;
 };
 
 export default PokemonDetails;
